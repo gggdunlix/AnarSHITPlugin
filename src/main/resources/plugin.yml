@@ -1,0 +1,20 @@
+name: GGG-Anarchy
+main: ml.gggrealms.AnarSHIT
+version: 0.0.1
+description: "Anarchy base for AnarSHIT"
+api-version: 1.19
+author: "GGGDunlix"
+commands:
+  bugreport:
+    description: "Useful for reporting bugs, errors, problems, or glitches to the devs."
+    aliases:
+      - "bug"
+      - "br"
+      - "breport"
+  party:
+    description: "shows commands for managing player parties."
+  partychat:
+    description: "Send private messages to all members of your party"
+    aliases:
+      - "p"
+      - "pchat"
