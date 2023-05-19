@@ -12,6 +12,7 @@ commands:
       - "br"
       - "breport"
   party:
+    usage: "/party"
     description: "shows commands for managing player parties."
   partychat:
     description: "Send private messages to all members of your party"
