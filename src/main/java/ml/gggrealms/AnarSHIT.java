@@ -18,6 +18,7 @@ public class AnarSHIT extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("====================================================");
         this.getCommand("party").setExecutor(new PartyCommand());
         this.getCommand("party").setTabCompleter(new PartyCommandTab());
+        this.getCommand("partychat").setExecutor(new PartyChatCmd());
         Bukkit.getConsoleSender().sendMessage("AnarSHIT Base Plugin Started");
         Bukkit.getConsoleSender().sendMessage("====================================================");
 
