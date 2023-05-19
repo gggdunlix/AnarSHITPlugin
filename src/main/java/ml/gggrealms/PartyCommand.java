@@ -42,7 +42,7 @@ public class PartyCommand implements CommandExecutor {
                     p.sendMessage(Component.text("| -=> -=- "+ player.getName() +": "));
                     String location = "(" + player.getLocation().getBlockX() + "," +player.getLocation().getBlockY()+ "," +player.getLocation().getBlockZ()+ ")";
                     p.sendMessage(Component.text("| -=> -=- > > Location: " + location));
-                    p.sendMessage(Component.text("| -=> -=- > > Health: " + player.getHealth()));
+                    p.sendMessage(Component.text("| -=> -=- > > Health: " + (int) player.getHealth()));
                 }
             }
         }
