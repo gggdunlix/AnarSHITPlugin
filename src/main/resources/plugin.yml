@@ -19,3 +19,5 @@ commands:
     aliases:
       - "p"
       - "pchat"
+  shutoff:
+    description: "Shuts down server after certain amount of minutes"

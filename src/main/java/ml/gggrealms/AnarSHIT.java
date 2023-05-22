@@ -15,12 +15,14 @@ public class AnarSHIT extends JavaPlugin {
     public static ArrayList<Party> parties = new ArrayList<>();
     @Override
     public void onEnable() {
-        Bukkit.getConsoleSender().sendMessage("====================================================");
+        Bukkit.getConsoleSender().sendMessage("===================================================");
         this.getCommand("party").setExecutor(new PartyCommand());
         this.getCommand("party").setTabCompleter(new PartyCommandTab());
         this.getCommand("partychat").setExecutor(new PartyChatCmd());
+        this.getCommand("shutoff").setExecutor(new ShutoffServer());
+        this.getCommand("bugreport").setExecutor(new BugreportCommand());
         Bukkit.getConsoleSender().sendMessage("AnarSHIT Base Plugin Started");
-        Bukkit.getConsoleSender().sendMessage("====================================================");
+        Bukkit.getConsoleSender().sendMessage("===================================================");
 
     }
     public static Party getPlayerParty(Player player) {
@@ -79,11 +81,11 @@ public class AnarSHIT extends JavaPlugin {
         Player recipient = (Player) event.getEntity();
         String attackerPcode = getPlayerParty(attacker).getCode();
         String recipPcode = getPlayerParty(recipient).getCode();
-        boolean sameParty = false;
+        attacker.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
+        recipient.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
         if (attackerPcode.equals(recipPcode)) {
-            sameParty = true;
-        }
-        if (sameParty) {
+            attacker.sendMessage("Codes are =!");
+            recipient.sendMessage("Codes are =!");
             event.setCancelled(true);
             attacker.sendMessage("Blocked friendly fire");
         }
