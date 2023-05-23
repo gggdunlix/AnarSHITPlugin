@@ -77,17 +77,19 @@ public class AnarSHIT extends JavaPlugin {
     }
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
-        Player attacker = (Player) event.getDamager();
-        Player recipient = (Player) event.getEntity();
-        String attackerPcode = getPlayerParty(attacker).getCode();
-        String recipPcode = getPlayerParty(recipient).getCode();
-        attacker.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
-        recipient.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
-        if (attackerPcode.equals(recipPcode)) {
-            attacker.sendMessage("Codes are =!");
-            recipient.sendMessage("Codes are =!");
-            event.setCancelled(true);
-            attacker.sendMessage("Blocked friendly fire");
+        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
+            Player attacker = (Player) event.getDamager();
+            Player recipient = (Player) event.getEntity();
+            String attackerPcode = getPlayerParty(attacker).getCode();
+            String recipPcode = getPlayerParty(recipient).getCode();
+            attacker.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
+            recipient.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
+            if (attackerPcode.equals(recipPcode)) {
+                attacker.sendMessage("Codes are =!");
+                recipient.sendMessage("Codes are =!");
+                event.setCancelled(true);
+                attacker.sendMessage("Blocked friendly fire");
+            }
         }
     }
 }
