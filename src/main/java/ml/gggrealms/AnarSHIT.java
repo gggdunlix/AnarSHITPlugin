@@ -1,17 +1,24 @@
 package ml.gggrealms;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.event.HoverEventSource;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.event.*;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
-public class AnarSHIT extends JavaPlugin {
+public class AnarSHIT extends JavaPlugin implements Listener {
     public static ArrayList<Party> parties = new ArrayList<>();
     @Override
     public void onEnable() {
@@ -24,6 +31,20 @@ public class AnarSHIT extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("AnarSHIT Base Plugin Started");
         Bukkit.getConsoleSender().sendMessage("===================================================");
 
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        event.getPlayer().sendMessage(Component.text("Welcome to the AnarSHIT anarchy server."));
+        event.getPlayer().sendMessage(Component.text("Here you can do whatever the hell you want."));
+        Component discordLink = Component.text("https://discord.gg/Yr3sCDgVvR", TextColor.color(0x2752AC));
+        discordLink.hoverEvent(HoverEvent.showText(Component.text("Click to open")));
+        try {
+            discordLink.clickEvent(ClickEvent.openUrl(new URL("https://discord.gg/Yr3sCDgVvR")));
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        event.getPlayer().sendMessage(discordLink);
     }
     public static Party getPlayerParty(Player player) {
         for (Party p : parties) {
@@ -77,19 +98,19 @@ public class AnarSHIT extends JavaPlugin {
     }
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
-            Player attacker = (Player) event.getDamager();
-            Player recipient = (Player) event.getEntity();
-            String attackerPcode = getPlayerParty(attacker).getCode();
-            String recipPcode = getPlayerParty(recipient).getCode();
-            attacker.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
-            recipient.sendMessage(attackerPcode + " Attacker: " + attacker.getName() + "\n" + recipPcode + " recipient: " + recipient.getName());
-            if (attackerPcode.equals(recipPcode)) {
-                attacker.sendMessage("Codes are =!");
-                recipient.sendMessage("Codes are =!");
-                event.setCancelled(true);
-                attacker.sendMessage("Blocked friendly fire");
-            }
+        if (!(event.getDamager() instanceof Player)) {
+            return;
         }
+        if (!(event.getEntity() instanceof Player)) {
+            return;
+        }
+        Player attacker = (Player) event.getDamager();
+        Player recipient = (Player) event.getEntity();
+        String attackerPcode = getPlayerParty(attacker).getCode();
+        String recipPcode = getPlayerParty(recipient).getCode();if (attackerPcode.equals(recipPcode)) {
+            event.setCancelled(true);
+            attacker.sendMessage("Blocked friendly fire");
+        }
+
     }
 }

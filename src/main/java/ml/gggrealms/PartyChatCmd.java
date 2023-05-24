@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 public class PartyChatCmd implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player p = (Player) sender;
-        String msg = "< Party Chat | " + p.getName() + ">";
+        String msg = "<Party Chat | " + p.getName() + ">";
         for (String s : args) {
             msg += " " + s;
         }

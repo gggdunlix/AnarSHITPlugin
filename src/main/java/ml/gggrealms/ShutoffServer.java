@@ -25,6 +25,7 @@ public class ShutoffServer implements CommandExecutor {
                 mins += 10;
             }
             final int[] seconds = {mins * 60};
+            final int secs = seconds[0];
             final int sec = seconds[0];
             final BossBar[] bar = {BossBar.bossBar((ComponentLike) Component.text("SHUTDOWN IN " + seconds[0] + "s"), 1.0f, BossBar.Color.RED, BossBar.Overlay.PROGRESS)};
             DiscordWebhook hook = new DiscordWebhook("https://discord.com/api/webhooks/1109221041529692172/Z0TCC2UHVj0atkP39orwCTZ6F8SKgkX5QMWPZyqsodv4DvvFPMnYO-elqtmuwbH0wgmx");
@@ -41,9 +42,11 @@ public class ShutoffServer implements CommandExecutor {
                     if (seconds[0] >0) {
                         seconds[0]--;
                         Collection<Player> allPs = (Collection<Player>) Bukkit.getOnlinePlayers();
-                        bar[0] = BossBar.bossBar((ComponentLike) Component.text("SHUTDOWN IN " + seconds[0] + "s"), (float) (seconds[0] / sec) , BossBar.Color.RED, BossBar.Overlay.PROGRESS);
+
                         for (Player p : allPs) {
                             p.hideBossBar(bar[0]);
+                            bar[0].name(Component.text("SHUTDOWN IN " + seconds[0] + "s"));
+                            bar[0].progress((float)seconds[0] / secs);
                             p.showBossBar(bar[0]);
                         }
                     } else {
