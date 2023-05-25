@@ -40,6 +40,7 @@ public class ShutoffServer implements CommandExecutor {
             } catch (IOException e) {
                 Bukkit.getConsoleSender().sendMessage(e.toString());
             }
+            Bukkit.getConsoleSender().sendMessage(Component.text("-!- SERVER SHUTTING DOWN IN " + mins + " MIN -!-", TextColor.color(ff7e33)));
             new BukkitRunnable() {
                 @Override
                 public void run() {
