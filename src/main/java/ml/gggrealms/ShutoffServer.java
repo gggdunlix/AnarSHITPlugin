@@ -24,6 +24,10 @@ public class ShutoffServer implements CommandExecutor {
             if (mins == 0) {
                 mins += 10;
             }
+            Collection<Player> allPlayers = (Collection<Player>) Bukkit.getOnlinePlayers();
+            for (Player p : allPlayers) {
+                p.sendMessage(Component.text("-!- SERVER SHUTTING DOWN IN " + mins + " MIN -!-", TextColor.color(ff7e33)));
+            }
             final int[] seconds = {mins * 60};
             final int secs = seconds[0];
             final int sec = seconds[0];
@@ -39,7 +43,7 @@ public class ShutoffServer implements CommandExecutor {
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (seconds[0] >0) {
+                    if (seconds[0]>1) {
                         seconds[0]--;
                         Collection<Player> allPs = (Collection<Player>) Bukkit.getOnlinePlayers();
 
@@ -49,8 +53,14 @@ public class ShutoffServer implements CommandExecutor {
                             bar[0].progress((float)seconds[0] / secs);
                             p.showBossBar(bar[0]);
                         }
+                    } else if (seconds[0]==1){
+                         Collection<Player> allPs = (Collection<Player>) Bukkit.getOnlinePlayers();
+                        for (Player p : allPs) {
+                            p.kick("Server Shutting Down")
+                        }
                     } else {
                         Bukkit.shutdown();
+
                     }
                 }
             }.runTaskTimer(Bukkit.getPluginManager().getPlugin("GGG-Anarchy"), 0, 20);
