@@ -21,3 +21,8 @@ commands:
       - "pchat"
   shutoff:
     description: "Shuts down server after certain amount of minutes"
+  suicide:
+    description: "An easier way out..."
+    aliases:
+      - "kys"
+      - "kms"
