@@ -28,11 +28,30 @@ public class AnarSHIT extends JavaPlugin implements Listener {
         this.getCommand("partychat").setExecutor(new PartyChatCmd());
         this.getCommand("shutoff").setExecutor(new ShutoffServer());
         this.getCommand("bugreport").setExecutor(new BugreportCommand());
+        this.getCommand("suicide").setExecutor(new SuicideCmd());
         Bukkit.getConsoleSender().sendMessage("AnarSHIT Base Plugin Started");
         Bukkit.getConsoleSender().sendMessage("===================================================");
 
     }
-
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        if (event.getPlayer() instanceof) {
+            Player dead = event.getPlayer();
+            if (dead.getScoreboardTags().contains("suicidal") {
+                Math.Random rand = new Math.Random();
+                int randomNum = rand.nextInt(4 – 1 + 1) + 1;
+                if (randomNum ==1) {
+                    event.setDeathMessage(dead.getName() + " took the easy way out");
+                } else if (randomNum==2) {
+                    event.setDeathMessage(dead.getName() + " killed themself");
+                } else if (randomNum==3) {
+                    event.setDeathMessage(dead.getName() + " committed suicide");
+                } else if (randomNum==4) {
+                    event.setDeathMessage(dead.getName() + "'s plead for death was answered");
+                }
+            }
+        }
+    }
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         event.getPlayer().sendMessage(Component.text("Welcome to the AnarSHIT anarchy server."));
