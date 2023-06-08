@@ -126,7 +126,11 @@ public class AnarSHIT extends JavaPlugin implements Listener {
         Player attacker = (Player) event.getDamager();
         Player recipient = (Player) event.getEntity();
         String attackerPcode = getPlayerParty(attacker).getCode();
-        String recipPcode = getPlayerParty(recipient).getCode();if (attackerPcode.equals(recipPcode)) {
+        String recipPcode = getPlayerParty(recipient).getCode();
+        if (attackerPcode == null || recipPcode == null) {
+            return;
+        }
+        if (attackerPcode.equals(recipPcode)) {
             event.setCancelled(true);
             attacker.sendMessage("Blocked friendly fire");
         }
