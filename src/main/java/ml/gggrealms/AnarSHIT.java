@@ -125,9 +125,13 @@ public class AnarSHIT extends JavaPlugin implements Listener {
         }
         Player attacker = (Player) event.getDamager();
         Player recipient = (Player) event.getEntity();
-        String attackerPcode = getPlayerParty(attacker).getCode();
-        String recipPcode = getPlayerParty(recipient).getCode();
-        if (attackerPcode == null || recipPcode == null) {
+        if (getPlayerParty(attacker) != null && getPlayerParty(recipient) != null) {
+            String attackerPcode = getPlayerParty(attacker).getCode();
+            String recipPcode = getPlayerParty(recipient).getCode();
+        } else {
+            return;
+        }
+         if (attackerPcode == null || recipPcode == null) {
             return;
         }
         if (attackerPcode.equals(recipPcode)) {
