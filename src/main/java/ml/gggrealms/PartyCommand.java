@@ -40,7 +40,7 @@ public class PartyCommand implements CommandExecutor {
                 ArrayList<Player> pPlayers = party.getPlayers();
                 for (Player player : pPlayers) {
                     p.sendMessage(Component.text("| -=> -=- "+ player.getName() +": "));
-                    String location = "(" + player.getLocation().getBlockX() + "," +player.getLocation().getBlockY()+ "," +player.getLocation().getBlockZ()+ ")";
+                    String location = "(" + player.getLocation().getBlockX() + ", " +player.getLocation().getBlockY()+ ", " +player.getLocation().getBlockZ()+ "), " + player.getWorld().getName();
                     p.sendMessage(Component.text("| -=> -=- > > Location: " + location));
                     p.sendMessage(Component.text("| -=> -=- > > Health: " + (int) player.getHealth() + "/" + player.getMaxHealth()));
                 }

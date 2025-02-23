@@ -1,8 +1,7 @@
 name: GGG-Anarchy
 main: ml.gggrealms.AnarSHIT
-version: 0.0.1
+version: 0.1.0
 description: "Anarchy base for AnarSHIT"
-api-version: 1.19
 author: "GGGDunlix"
 commands:
   bugreport:

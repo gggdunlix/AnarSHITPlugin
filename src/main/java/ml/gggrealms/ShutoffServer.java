@@ -3,6 +3,7 @@ package ml.gggrealms;
 import net.kyori.adventure.bossbar.BossBar;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.ComponentLike;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -26,7 +27,7 @@ public class ShutoffServer implements CommandExecutor {
             }
             Collection<Player> allPlayers = (Collection<Player>) Bukkit.getOnlinePlayers();
             for (Player p : allPlayers) {
-                p.sendMessage(Component.text("-!- SERVER SHUTTING DOWN IN " + mins + " MIN -!-", TextColor.color(ff7e33)));
+                p.sendMessage(Component.text("-!- SERVER SHUTTING DOWN IN " + mins + " MIN -!-", TextColor.color(0xff7e33)));
             }
             final int[] seconds = {mins * 60};
             final int secs = seconds[0];
@@ -40,7 +41,7 @@ public class ShutoffServer implements CommandExecutor {
             } catch (IOException e) {
                 Bukkit.getConsoleSender().sendMessage(e.toString());
             }
-            Bukkit.getConsoleSender().sendMessage(Component.text("-!- SERVER SHUTTING DOWN IN " + mins + " MIN -!-", TextColor.color(ff7e33)));
+            Bukkit.getConsoleSender().sendMessage(Component.text("-!- SERVER SHUTTING DOWN IN " + mins + " MIN -!-", TextColor.color(0xFF7E33)));
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -55,13 +56,13 @@ public class ShutoffServer implements CommandExecutor {
                             p.showBossBar(bar[0]);
                         }
                     } else if (seconds[0]==1){
+                        seconds[0]--;
                          Collection<Player> allPs = (Collection<Player>) Bukkit.getOnlinePlayers();
                         for (Player p : allPs) {
-                            p.kick("Server Shutting Down")
+                            p.kick(Component.text("Server shutting down"));
                         }
                     } else {
                         Bukkit.shutdown();
-
                     }
                 }
             }.runTaskTimer(Bukkit.getPluginManager().getPlugin("GGG-Anarchy"), 0, 20);

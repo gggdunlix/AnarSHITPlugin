@@ -18,9 +18,16 @@ public class SuicideCmd implements CommandExecutor {
         if (sender instanceof Player) {
           Player p = (Player) sender;
           p.addScoreboardTag("suicidal");
-          p.setHealth(0);
+          new BukkitRunnable() {
+
+              @Override
+              public void run() {
+
+              }
+          }.runTaskLater(Bukkit.getPluginManager().getPlugin("GGG-Anarchy"), 20);
+          p.setHealth(0.0);
         } else {
-          sender.sendMessage("Only can be executed as a player")
+          sender.sendMessage("Only can be executed as a player");
         }
         return true;
     }
